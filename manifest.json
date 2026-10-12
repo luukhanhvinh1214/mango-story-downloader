@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Mango Story Downloader",
+  "description": "Tải video story Facebook về máy thành file mp4",
+  "version": "0.1.0",
+  "action": {
+    "default_title": "Mango Story Downloader",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.facebook.com/*"],
+      "js": ["src/msd_story.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["https://*.facebook.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": ["downloads"],
+  "host_permissions": ["https://*.facebook.com/*"]
+}

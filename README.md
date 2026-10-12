@@ -1,0 +1,52 @@
+# Mango Story Downloader
+
+Extension Chrome tải video story Facebook về máy thành file mp4, do
+**Vinhdeptrai** xây dựng.
+
+Tiện ích dùng chính tài khoản Facebook bạn đang đăng nhập. Mọi thứ chạy trên
+máy bạn, không có máy chủ ngoài, không thu thập dữ liệu.
+
+## Chức năng
+
+- Tải story video đang xem về máy thành file mp4, có cả hình lẫn tiếng.
+- Lấy bản HD khi Facebook có, không có thì lấy bản thường.
+- Tải đúng thẻ story đang hiện trên màn hình, kể cả khi người đăng có nhiều
+  story nối nhau.
+
+## Cài đặt
+
+Chưa lên Chrome Web Store, nạp thủ công:
+
+```bash
+git clone https://github.com/luukhanhvinh1214/mango-story-downloader.git
+```
+
+1. Mở `chrome://extensions`
+2. Bật **Chế độ dành cho nhà phát triển** (góc trên bên phải)
+3. Bấm **Tải tiện ích đã giải nén** và chọn thư mục vừa clone
+4. Tải lại các tab Facebook đang mở
+
+## Sử dụng
+
+1. Mở một story video trên Facebook.
+2. Bấm vào icon tiện ích trên thanh công cụ.
+3. Bấm **Tải video**. File mp4 lưu vào thư mục Tải xuống của Chrome.
+
+## Giới hạn
+
+- Chỉ tải được story video. Story ảnh và story chữ chưa hỗ trợ.
+- Story đã quá 24 giờ hoặc bị người đăng xoá thì không tải được.
+- Bạn chỉ tải được story mà tài khoản của bạn xem được.
+- Facebook đổi cách tải dữ liệu thì tiện ích có thể ngừng chạy cho tới khi được
+  cập nhật.
+
+Story là nội dung của người khác. Chỉ giữ lại những gì bạn được phép giữ, và
+hỏi người đăng trước khi đăng lại ở nơi khác.
+
+---
+
+## Tác giả
+
+Dự án được xây dựng và phát triển bởi **Lưu Khánh Vinh** (**Vinhdeptrai**).
+
+- GitHub: [@luukhanhvinh1214](https://github.com/luukhanhvinh1214)

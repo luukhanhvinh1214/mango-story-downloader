@@ -1,0 +1,53 @@
+:root {
+  color-scheme: light dark;
+  --surface: #ffffff;
+  --text: #1c1e21;
+  --muted: #65676b;
+  --accent: #f5a623;
+  --accent-text: #1c1e21;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #18191a;
+    --text: #e4e6eb;
+    --muted: #b0b3b8;
+  }
+}
+
+body {
+  width: 260px;
+  margin: 0;
+  padding: 16px;
+  font: 14px/1.4 system-ui, sans-serif;
+  background: var(--surface);
+  color: var(--text);
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.status {
+  min-height: 1.4em;
+  margin: 10px 0 0;
+  color: var(--muted);
+}
