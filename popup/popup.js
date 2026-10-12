@@ -17,7 +17,7 @@ async function downloadCurrentStory() {
   showStatus("Đang tìm video");
   try {
     const result = await chrome.runtime.sendMessage({ type: "downloadStory", tabId: tab.id });
-    showStatus(result.ok ? "Đã bắt đầu tải" : result.error);
+    showStatus(result.ok ? `Đang tải bản ${result.quality}` : result.error);
   } catch (err) {
     showStatus("Không tải được: " + err.message);
   } finally {

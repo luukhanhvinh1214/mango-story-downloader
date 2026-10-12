@@ -21,7 +21,7 @@ async function downloadStory(tabId) {
     url: video.url,
     filename: videoFileName(video.id),
   });
-  return { ok: true, downloadId };
+  return { ok: true, downloadId, quality: video.quality === "HD" ? "HD" : "SD" };
 }
 
 async function findStoryVideo(tabId) {

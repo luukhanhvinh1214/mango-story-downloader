@@ -30,12 +30,18 @@ git clone https://github.com/luukhanhvinh1214/mango-story-downloader.git
 
 1. Mở một story video trên Facebook.
 2. Bấm vào icon tiện ích trên thanh công cụ.
-3. Bấm **Tải video**. File mp4 lưu vào thư mục Tải xuống của Chrome.
+3. Bấm **Tải video**. File mp4 lưu vào thư mục Tải xuống của Chrome, popup báo
+   bạn đang tải bản HD hay SD.
+
+Story cũ của chính bạn nằm trong **Kho lưu trữ tin**: mở `facebook.com/stories`,
+bấm **Kho lưu trữ** ở góc trên bên trái, chọn một story rồi làm như trên.
 
 ## Giới hạn
 
 - Chỉ tải được story video. Story ảnh và story chữ chưa hỗ trợ.
-- Story đã quá 24 giờ hoặc bị người đăng xoá thì không tải được.
+- Story trong kho lưu trữ chỉ còn bản 360p. Facebook không giữ bản nét hơn cho
+  story cũ, nên tiện ích cũng không lấy được.
+- Story của người khác đã quá 24 giờ hoặc bị xoá thì không tải được.
 - Bạn chỉ tải được story mà tài khoản của bạn xem được.
 - Facebook đổi cách tải dữ liệu thì tiện ích có thể ngừng chạy cho tới khi được
   cập nhật.
