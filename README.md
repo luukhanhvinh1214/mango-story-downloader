@@ -9,7 +9,8 @@ máy bạn, không có máy chủ ngoài, không thu thập dữ liệu.
 ## Chức năng
 
 - Tải story video đang xem về máy thành file mp4, có cả hình lẫn tiếng.
-- Lấy bản HD khi Facebook có, không có thì lấy bản thường.
+- Lấy bản nét nhất Facebook có, tới 1080p. Bản 1080p được Facebook tách riêng
+  hình và tiếng, tiện ích tự ghép lại ngay trên máy bạn.
 - Tải đúng thẻ story đang hiện trên màn hình, kể cả khi người đăng có nhiều
   story nối nhau.
 
@@ -31,7 +32,7 @@ git clone https://github.com/luukhanhvinh1214/mango-story-downloader.git
 1. Mở một story video trên Facebook.
 2. Bấm vào icon tiện ích trên thanh công cụ.
 3. Bấm **Tải video**. File mp4 lưu vào thư mục Tải xuống của Chrome, popup báo
-   bạn đang tải bản HD hay SD.
+   độ nét của bản đang tải, ví dụ 1080p. Bản cần ghép mất thêm vài giây.
 
 Story cũ của chính bạn nằm trong **Kho lưu trữ tin**: mở `facebook.com/stories`,
 bấm **Kho lưu trữ** ở góc trên bên trái, chọn một story rồi làm như trên.
@@ -39,8 +40,10 @@ bấm **Kho lưu trữ** ở góc trên bên trái, chọn một story rồi là
 ## Giới hạn
 
 - Chỉ tải được story video. Story ảnh và story chữ chưa hỗ trợ.
-- Story còn hạn tải được tới 720p. Facebook có bản 1080p nhưng tách riêng hình
-  và tiếng, tiện ích chưa ghép được.
+- Bản ghép 1080p dùng chuẩn nén VP9. Chrome và VLC phát được ngay; trình phát
+  có sẵn của Windows cần gói **VP9 Video Extensions** từ Microsoft Store. Máy
+  nào không mở được thì tắt **Tải bản 1080p khi có** trong popup, tiện ích sẽ
+  lấy bản 720p H.264 phát được ở mọi nơi.
 - Story trong kho lưu trữ chỉ còn bản 360p. Facebook không giữ bản nét hơn cho
   story cũ, nên tiện ích cũng không lấy được.
 - Story của người khác đã quá 24 giờ hoặc bị xoá thì không tải được.

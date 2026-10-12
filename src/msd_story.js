@@ -98,22 +98,43 @@
   }
 
   function toVideo(media) {
-    const source = pickVideoSource(media);
-    if (source) return { id: media.id, ...source };
+    const delivery = media.videoDeliveryResponseFragment && media.videoDeliveryResponseFragment.videoDeliveryResponseResult;
+    const source = pickVideoSource(media, delivery);
+    const dashXml = pickDashXml(delivery);
+    if (source || dashXml) return { id: media.id, ...source, dashXml };
     if (media.__typename === "Video") return { id: media.id, error: "Không tìm thấy link tải của video này" };
     return { id: media.id, error: "Story này không có video" };
   }
 
-  function pickVideoSource(media) {
-    const delivery = media.videoDeliveryResponseFragment && media.videoDeliveryResponseFragment.videoDeliveryResponseResult;
+  function pickVideoSource(media, delivery) {
     const progressive = ((delivery && delivery.progressive_urls) || []).filter((item) => item.progressive_url);
     const byQuality = (quality) => progressive.find((item) => item.metadata && item.metadata.quality === quality);
     const best = byQuality("HD") || byQuality("SD") || progressive[0];
-    if (best) return { url: best.progressive_url, quality: (best.metadata && best.metadata.quality) || "SD" };
+    if (best) return describeSource(best.progressive_url, (best.metadata && best.metadata.quality) || "SD");
 
     const hd = media.browser_native_hd_url || media.playable_url_quality_hd;
-    if (hd) return { url: hd, quality: "HD" };
+    if (hd) return describeSource(hd, "HD");
     const sd = media.browser_native_sd_url || media.playable_url;
-    return sd ? { url: sd, quality: "SD" } : null;
+    return sd ? describeSource(sd, "SD") : null;
+  }
+
+  function describeSource(url, fallbackQuality) {
+    const side = shortSideOf(url);
+    return { url, side, quality: side ? side + "p" : fallbackQuality };
+  }
+
+  function shortSideOf(url) {
+    try {
+      const efg = JSON.parse(atob(new URL(url).searchParams.get("efg") || ""));
+      const match = /\.C3\.(\d+)\./.exec(efg.vencode_tag || "");
+      return match ? Number(match[1]) : 0;
+    } catch {
+      return 0;
+    }
+  }
+
+  function pickDashXml(delivery) {
+    const manifest = ((delivery && delivery.dash_manifests) || []).find((item) => item && item.manifest_xml);
+    return manifest ? manifest.manifest_xml : undefined;
   }
 })();

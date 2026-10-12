@@ -46,6 +46,25 @@ button:disabled {
   cursor: default;
 }
 
+.option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+.option input {
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.hint {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
 .status {
   min-height: 1.4em;
   margin: 10px 0 0;
