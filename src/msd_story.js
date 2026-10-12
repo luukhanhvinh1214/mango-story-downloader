@@ -1,7 +1,7 @@
 (() => {
   const SOURCE = "msd";
   const GRAPHQL_PATH = "/api/graphql/";
-  const STORY_MARKER = '"__typename":"Story"';
+  const CARD_MARKER = '"story_card_info"';
 
   const storyVideos = new Map();
 
@@ -21,6 +21,32 @@
   }
 
   function currentCardId() {
+    return cardIdOnScreen() || cardIdInUrl();
+  }
+
+  // Mở story từ danh sách bên trái trang Tin thì URL không đổi, chỉ DOM có id thẻ.
+  function cardIdOnScreen() {
+    let best = null;
+    let bestArea = 0;
+    for (const el of document.querySelectorAll("[data-id]")) {
+      const id = el.getAttribute("data-id");
+      if (!storyVideos.has(id)) continue;
+      const area = visibleArea(el.getBoundingClientRect());
+      if (area > bestArea) {
+        best = id;
+        bestArea = area;
+      }
+    }
+    return best;
+  }
+
+  function visibleArea(rect) {
+    const width = Math.min(rect.right, innerWidth) - Math.max(rect.left, 0);
+    const height = Math.min(rect.bottom, innerHeight) - Math.max(rect.top, 0);
+    return width > 0 && height > 0 ? width * height : 0;
+  }
+
+  function cardIdInUrl() {
     const url = new URL(location.href);
     const fromQuery = url.searchParams.get("card_id");
     if (fromQuery) return fromQuery;
@@ -39,7 +65,7 @@
   function onGraphqlLoad() {
     if (this.responseType !== "" && this.responseType !== "text") return;
     const text = this.responseText;
-    if (!text.includes(STORY_MARKER)) return;
+    if (!text.includes(CARD_MARKER)) return;
     for (const line of text.split("\n")) collectStories(parseLine(line));
   }
 
@@ -54,10 +80,12 @@
 
   function collectStories(node) {
     if (!node || typeof node !== "object") return;
-    if (node.__typename === "Story" && typeof node.id === "string" && Array.isArray(node.attachments)) {
-      rememberStory(node);
-    }
+    if (isStoryCard(node)) rememberStory(node);
     for (const key in node) collectStories(node[key]);
+  }
+
+  function isStoryCard(node) {
+    return typeof node.id === "string" && Array.isArray(node.attachments) && "story_card_info" in node;
   }
 
   function rememberStory(story) {

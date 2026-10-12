@@ -39,6 +39,8 @@ bấm **Kho lưu trữ** ở góc trên bên trái, chọn một story rồi là
 ## Giới hạn
 
 - Chỉ tải được story video. Story ảnh và story chữ chưa hỗ trợ.
+- Story còn hạn tải được tới 720p. Facebook có bản 1080p nhưng tách riêng hình
+  và tiếng, tiện ích chưa ghép được.
 - Story trong kho lưu trữ chỉ còn bản 360p. Facebook không giữ bản nét hơn cho
   story cũ, nên tiện ích cũng không lấy được.
 - Story của người khác đã quá 24 giờ hoặc bị xoá thì không tải được.
