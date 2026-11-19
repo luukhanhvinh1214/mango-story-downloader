@@ -53,8 +53,12 @@ bấm **Kho lưu trữ** ở góc trên bên trái, chọn một story rồi là
   story cũ, nên tiện ích cũng không lấy được.
 - Story của người khác đã quá 24 giờ hoặc bị xoá thì không tải được.
 - Bạn chỉ tải được story mà tài khoản của bạn xem được.
-- Tải lại trang thì story bạn đã xem vẫn hiện là thẻ mới, vì Facebook không
-  được báo là bạn đã xem.
+- Vừa xem xong, vòng story chuyển xám ngay trong trang đang mở. Đó là Facebook
+  tự tô trên máy bạn, không gửi đi đâu cả. Tải lại trang thì vòng xanh trở lại
+  và người đăng không thấy tên bạn.
+- Cài hoặc tải lại tiện ích thì các tab Facebook đang mở được chặn ngay, không
+  cần F5. Riêng khi tắt rồi bật lại tiện ích, hãy F5 tab Facebook trước khi xem
+  story.
 - Nếu Chrome hỏi nơi lưu file và bạn để hộp thoại mở quá lâu, story có thể
   không tự đóng. File vẫn tải bình thường.
 - Facebook đổi cách tải dữ liệu thì tiện ích có thể ngừng chạy cho tới khi được

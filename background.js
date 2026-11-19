@@ -14,6 +14,23 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return true;
 });
 
+chrome.runtime.onInstalled.addListener(() => {
+  injectIntoOpenTabs().catch((err) => console.warn("Không gắn được vào tab Facebook đang mở:", err.message));
+});
+
+// Chrome không nạp content script vào tab mở từ trước khi cài hoặc tải lại extension, tab đó sẽ báo đã xem.
+async function injectIntoOpenTabs() {
+  const tabs = await chrome.tabs.query({ url: "https://*.facebook.com/*" });
+  const results = await Promise.allSettled(
+    tabs.map((tab) =>
+      chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ["src/msd_story.js"], world: "MAIN" })
+    )
+  );
+  for (const result of results) {
+    if (result.status === "rejected") console.warn("Không gắn được vào một tab Facebook:", result.reason.message);
+  }
+}
+
 chrome.downloads.onChanged.addListener(({ id, state }) => {
   if (!state || state.current === "in_progress" || !storyTabByDownload.has(id)) return;
   const tabId = storyTabByDownload.get(id);
