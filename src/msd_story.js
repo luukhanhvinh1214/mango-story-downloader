@@ -2,10 +2,12 @@
   const SOURCE = "msd";
   const GRAPHQL_PATH = "/api/graphql/";
   const CARD_MARKER = '"story_card_info"';
+  const SEEN_MUTATION = "storiesUpdateSeenStateMutation";
 
   const storyVideos = new Map();
 
   listenToGraphql();
+  blockSeenMutation();
 
   window.addEventListener("message", (event) => {
     const data = event.data;
@@ -60,6 +62,18 @@
       if (String(url).includes(GRAPHQL_PATH)) this.addEventListener("load", onGraphqlLoad);
       return open.apply(this, arguments);
     };
+  }
+
+  function blockSeenMutation() {
+    const send = XMLHttpRequest.prototype.send;
+    XMLHttpRequest.prototype.send = function (body) {
+      if (isSeenMutation(body)) return;
+      return send.apply(this, arguments);
+    };
+  }
+
+  function isSeenMutation(body) {
+    return typeof body === "string" && new URLSearchParams(body).get("fb_api_req_friendly_name") === SEEN_MUTATION;
   }
 
   function onGraphqlLoad() {

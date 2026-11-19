@@ -1,5 +1,5 @@
-const FACEBOOK_HOST = /(^|\.)facebook\.com$/;
-const STORY_PATH = /^\/stories\//;
+import { isStoryPage } from "../src/msd_video.js";
+
 const PREFER_1080P_KEY = "msd-prefer-1080p";
 
 const downloadButton = document.getElementById("download-button");
@@ -12,7 +12,7 @@ downloadButton.addEventListener("click", downloadCurrentStory);
 
 async function downloadCurrentStory() {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  if (!isStoryTab(tab)) {
+  if (!tab || !isStoryPage(tab.url)) {
     showStatus("Mở một story Facebook trước đã");
     return;
   }
@@ -31,12 +31,6 @@ async function downloadCurrentStory() {
   } finally {
     downloadButton.disabled = false;
   }
-}
-
-function isStoryTab(tab) {
-  if (!tab || !tab.url) return false;
-  const { hostname, pathname } = new URL(tab.url);
-  return FACEBOOK_HOST.test(hostname) && STORY_PATH.test(pathname);
 }
 
 function showStatus(text) {

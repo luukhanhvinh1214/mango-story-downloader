@@ -14,6 +14,12 @@ export function isPageBlobUrl(url) {
   return protocol === "https:" && PAGE_HOST.test(hostname);
 }
 
+export function isStoryPage(url) {
+  if (!URL.canParse(url)) return false;
+  const { protocol, hostname, pathname } = new URL(url);
+  return protocol === "https:" && PAGE_HOST.test(hostname) && pathname.startsWith("/stories/");
+}
+
 export function videoFileName(videoId) {
   return VIDEO_ID.test(videoId) ? `facebook-story-${videoId}.mp4` : "facebook-story.mp4";
 }

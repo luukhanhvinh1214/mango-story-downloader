@@ -13,6 +13,9 @@ máy bạn, không có máy chủ ngoài, không thu thập dữ liệu.
   hình và tiếng, tiện ích tự ghép lại ngay trên máy bạn.
 - Tải đúng thẻ story đang hiện trên màn hình, kể cả khi người đăng có nhiều
   story nối nhau.
+- Xem story mà không hiện tên trong danh sách người xem. Luôn bật khi tiện ích
+  đang chạy.
+- Tải xong thì tự đóng story, đưa bạn về trang chủ Facebook.
 
 ## Cài đặt
 
@@ -33,6 +36,8 @@ git clone https://github.com/luukhanhvinh1214/mango-story-downloader.git
 2. Bấm vào icon tiện ích trên thanh công cụ.
 3. Bấm **Tải video**. File mp4 lưu vào thư mục Tải xuống của Chrome, popup báo
    độ nét của bản đang tải, ví dụ 1080p. Bản cần ghép mất thêm vài giây.
+4. Tải xong, story tự đóng. Muốn tải tiếp thẻ khác của cùng người thì mở lại
+   story đó.
 
 Story cũ của chính bạn nằm trong **Kho lưu trữ tin**: mở `facebook.com/stories`,
 bấm **Kho lưu trữ** ở góc trên bên trái, chọn một story rồi làm như trên.
@@ -48,6 +53,10 @@ bấm **Kho lưu trữ** ở góc trên bên trái, chọn một story rồi là
   story cũ, nên tiện ích cũng không lấy được.
 - Story của người khác đã quá 24 giờ hoặc bị xoá thì không tải được.
 - Bạn chỉ tải được story mà tài khoản của bạn xem được.
+- Tải lại trang thì story bạn đã xem vẫn hiện là thẻ mới, vì Facebook không
+  được báo là bạn đã xem.
+- Nếu Chrome hỏi nơi lưu file và bạn để hộp thoại mở quá lâu, story có thể
+  không tự đóng. File vẫn tải bình thường.
 - Facebook đổi cách tải dữ liệu thì tiện ích có thể ngừng chạy cho tới khi được
   cập nhật.
 

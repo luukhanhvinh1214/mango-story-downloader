@@ -1,7 +1,10 @@
-import { isPageBlobUrl, isVideoUrl, videoFileName } from "./src/msd_video.js";
+import { isPageBlobUrl, isStoryPage, isVideoUrl, videoFileName } from "./src/msd_video.js";
 
 const NO_RECEIVER = "Receiving end does not exist";
 const NOT_FACEBOOK = "Link video không phải của Facebook";
+
+// ponytail: nhớ trong bộ nhớ service worker; worker bị Chrome tắt khi hộp thoại Lưu mở quá lâu thì story không tự đóng, cần chrome.storage.session nếu phải chắc.
+const storyTabByDownload = new Map();
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type !== "downloadStory") return false;
@@ -11,7 +14,27 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return true;
 });
 
+chrome.downloads.onChanged.addListener(({ id, state }) => {
+  if (!state || state.current === "in_progress" || !storyTabByDownload.has(id)) return;
+  const tabId = storyTabByDownload.get(id);
+  storyTabByDownload.delete(id);
+  if (state.current !== "complete" || [...storyTabByDownload.values()].includes(tabId)) return;
+  closeStory(tabId).catch((err) => console.warn("Không đóng được story:", err.message));
+});
+
+async function closeStory(tabId) {
+  const tab = await chrome.tabs.get(tabId);
+  if (!isStoryPage(tab.url)) return;
+  await chrome.tabs.update(tabId, { url: new URL(tab.url).origin + "/" });
+}
+
 async function downloadStory(tabId, allowMerge) {
+  const result = await startDownload(tabId, allowMerge);
+  if (result.ok) storyTabByDownload.set(result.downloadId, tabId);
+  return result;
+}
+
+async function startDownload(tabId, allowMerge) {
   const video = await askTab(tabId, { type: "findStoryVideo" });
   if (!video || (!video.url && !video.dash)) {
     return { ok: false, error: (video && video.error) || "Story này không có video" };
